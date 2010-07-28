@@ -1,0 +1,9 @@
+.. _index:
+
+=======================
+Persevere Documentation
+=======================
+
+:ref:`Introduction <introduction>`
+    Learn the basic layout of Persevere and how to write apps
+

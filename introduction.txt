@@ -1,0 +1,63 @@
+.. _introduction:
+
+============
+Introduction
+============
+
+What is Persevere?
+==================
+
+Persevere in it's most basic form lets you store sets of data either with or without a schema. It lets you query/access/edit this data from the client or the server, and lets you control what aspects of the data can be changed based on user roles. You can use an SQL-based backend for storage, and even use existing SQL tables. Not only that, but it also can notify clients through Comet/Rest Channels when data has been updated on the server, and lets you make JSON-RPC calls to the server-side javascript environment to do more intensive data manipulation that would normally require several requests. It also lets you serve static content, and generate dynamic content that can be served to a browser, if nessesary.
+
+Cool, Let's Dive In!
+====================
+
+Assuming you have node and persevere working, start off by grabbing the persevere template app off of Kris Zypp's github account.
+
+When working with data through Persevere, there are two components that are used: Models, and Facets.
+
+Models
+------
+
+Models, like it's name implies, are database models. These can be used to access the data stored in the store, without having to worry about the backend where the data is actually stored. Models can have a schema, but they don't nessesarily have to. In a typical persevere app layout, models would go in `/lib/model/`.
+
+Let's say we wanted to write a "Question and Answer" app, and we needed a question model to store questions in. Here's a sample model that we would put in `/lib/model/question.js`. 
+
+.. code-block:: javascript
+
+    var Model = require("model").Model,
+        DefaultStore = require("perstore/stores").DefaultStore,
+        questionStore = DefaultStore("Question");
+
+    exports.Question = Model("Question", questionStore, {
+        properties: {
+            text: String,
+            views: Number
+        },
+        construct: function(question, directives){
+            question.views = 0;
+            return question.save(directives);
+        },
+        prototype: {
+            addView: function(){
+                this.views += 1;
+                this.save();
+                return true; 
+            }
+        }
+    });
+
+We start off by requiring the model class, and a store that we will stick our data in. In most cases, the way it's done here will be sufficient, but you can use a store that uses an SQL backend if need be. We'll name this store "Question", and put it in the variable `questionStore` so we can use it later.
+
+After this, we declare our model. Notice how we're declaring it as `exports.Question`, rather than just a variable. This is because if we want to use `require()` in another file to get this model, we need to stick it in the `exports` object. Now, we can access this model declaration using `require("lib/model/question").Question`.
+
+Inside the model declaration, we have a few parameters. `properties` is the schema that we're using. It's an object that has the name of the property as the key, and the core Javascript object constructor as the value. So, you can put things like `String`, `Number`, `Object`, etc.
+
+Then, there's `construct`. This is a function that lets us set up some default values. In our schema, we have a `views` field, and by default we want `views` to be set to zero, since nobody has viewed whatever question we're constructing yet. In this case, the `question` argument is the question being constructed, and the `directives` argument is TODO: what are directives?.
+
+In `prototype`, we can provide some functions that can be easily called for things we may want to do with our question. These functions can be accessed from the client if need be. In this case, we have `addView`, which adds a view to our question (normally such an operation would require several requests if done on the client, so it's better if we do it here so the data on the client doesn't become outdated).
+
+Facets
+------
+
+Facets restrict what can and can't be done to models based on anything you want, but in most cases based on what user is logged in.
