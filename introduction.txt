@@ -51,7 +51,7 @@ We start off by requiring the model class, and a store that we will stick our da
 
 After this, we declare our model. Notice how we're declaring it as `exports.Question`, rather than just a variable. This is because if we want to use `require()` in another file to get this model, we need to stick it in the `exports` object. Now, we can access this model declaration using `require("lib/model/question").Question`.
 
-Inside the model declaration, we have a few parameters. `properties` is the schema that we're using. It's an object that has the name of the property as the key, and the core Javascript object constructor as the value. So, you can put things like `String`, `Number`, `Object`, etc.
+Inside the model declaration, we have a few parameters. `properties` is the schema that we're using. It's an object that has the name of the property as the key, and the core Javascript object constructor as the value. So, you can put things like `String`, `Number`, `Object`, etc. TODO: go through how objects can be used eg {type: Object}
 
 Then, there's `construct`. This is a function that lets us set up some default values. In our schema, we have a `views` field, and by default we want `views` to be set to zero, since nobody has viewed whatever question we're constructing yet. In this case, the `question` argument is the question being constructed, and the `directives` argument is TODO: what are directives?.
 
