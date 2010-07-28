@@ -7,7 +7,7 @@ Introduction
 What is Persevere?
 ==================
 
-Persevere in it's most basic form lets you store sets of data either with or without a schema. It lets you query/access/edit this data from the client or the server, and lets you control what aspects of the data can be changed based on user roles. You can use an SQL-based backend for storage, and even use existing SQL tables. Not only that, but it also can notify clients through Comet/Rest Channels when data has been updated on the server, and lets you make JSON-RPC calls to the server-side javascript environment to do more intensive data manipulation that would normally require several requests. It also lets you serve static content, and generate dynamic content that can be served to a browser, if nessesary.
+Persevere in it's most basic form lets you store sets of data using JSON objects either with or without a schema. It lets you query/access/edit this data from the client or the server, and lets you control what aspects of the data can be changed based on user roles. You can use an SQL-based backend for storage, and even use existing SQL tables. Not only that, but it also can notify clients through Comet/Rest Channels when data has been updated on the server, and lets you make JSON-RPC calls to the server-side javascript environment to do more intensive data manipulation that would normally require several requests. It also lets you serve static content, and generate dynamic content that can be served to a browser, if nessesary.
 
 Cool, Let's Dive In!
 ====================
