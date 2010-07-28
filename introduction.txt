@@ -12,14 +12,14 @@ Persevere in it's most basic form lets you store sets of data using JSON objects
 Cool, Let's Dive In!
 ====================
 
-Assuming you have node and persevere working, start off by grabbing the persevere template app off of Kris Zypp's github account.
+Assuming you have node and persevere working, start off by grabbing the persevere template app off of Kris Zyp's github account.
 
-When working with data through Persevere, there are two components that are used: Models, and Facets.
+When working with data through Persevere, there are two components that you'll need to use: Models, and Facets.
 
 Models
 ------
 
-Models, like it's name implies, are database models. These can be used to access the data stored in the store, without having to worry about the backend where the data is actually stored. Models can have a schema, but they don't nessesarily have to. In a typical persevere app layout, models would go in `/lib/model/`.
+Models, like it's name implies, are database models. These can be used to access the data stored in the store, without having to worry about the backend where the data is actually stored. Models can have a schema, but they don't nessesarily have to. The SQL equivalent of this would be a table, but it's a lot more powerful and flexible than a table. In a typical persevere app layout, models would go in `/lib/model/`, each having it's own file.
 
 Let's say we wanted to write a "Question and Answer" app, and we needed a question model to store questions in. Here's a sample model that we would put in `/lib/model/question.js`. 
 
